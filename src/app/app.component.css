@@ -1,0 +1,16 @@
+.header{
+    display: flex;
+    background-color: #ffa0a0;
+}
+.counteiner{
+    display: flex;
+    height: 70px;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.counteiner a{
+    margin-left: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+}

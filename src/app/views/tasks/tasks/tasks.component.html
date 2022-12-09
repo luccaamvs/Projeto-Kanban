@@ -1,0 +1,123 @@
+<!--  
+    Ferramenta de Kanban (cada 1,5)
+    1. Deve ser possível criar e "armazenar" uma tarefa
+    2. Permitir a exibição das tarefas criadas
+    3. Deve ser possível mover as tarefas entre quadros (TO DO, DOING, DONE)
+    4. Permitir definir categoria de tarefa (ou tag)
+    5. Permitir editar uma tarefa
+    6. Permitir excluir uma tarefa 
+-->
+
+<div class="all">
+    <div class="container">
+        <div class="card">
+            <div class="topo">
+                <h1>To Do</h1>
+                <button (click)="new('to-do')">Adicionar</button>
+            </div>
+
+            <div class="tasks">
+                <div *ngFor="let task of listaTasks" class="task">
+                    <div *ngIf="task.state === 'to-do'">
+                        <div >
+                            <div class="elementos">
+                                <div class="cabecalho">
+                                    <span class="titulo">{{task.title}}</span>
+                                    |
+                                    <span class="tag" *ngIf="task.tag != '' ">{{task.tag}}</span> 
+                                    
+                                </div>
+
+                                <div>
+                                    <button [matMenuTriggerFor]="menu">Alterações</button>
+
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item [matMenuTriggerFor]="actions"><i class="bi bi-arrows-move"></i> Mover para...</button>
+                                        <button  (click)="select(task)">Editar:</button>
+                                        <br><br><br>
+                                        <button  (click)="delete(task.id)">Exluir</button>
+                                    </mat-menu>
+                                    <mat-menu #actions="matMenu">
+                                        <button  (click)="refresh(task, 'doing')">Doong</button>
+                                        <button  (click)="refresh(task, 'done')">Done</button>
+                                    </mat-menu>
+                                </div>
+                            </div>
+
+                            <span *ngIf="task.mensagem != '' ">{{task.mensagem}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card">
+            <div class="topo">
+                <h1 >Doing</h1>
+                <button (click)="new('doing')">Adicionar</button>
+            </div>
+            <div *ngFor="let task of listaTasks">
+                <div *ngIf="task.state === 'doing'">
+                    <div>
+                        <div>
+                            <span>{{task.title}}</span>
+
+                            <button [matMenuTriggerFor]="menu">Alterações</button>
+
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item [matMenuTriggerFor]="actions"><i class="bi bi-arrows-move"></i> Mover para...</button>
+                                <button  (click)="select(task)"> Editar</button>
+                                <br><br><br>
+                                <button  (click)="delete(task.id)"> Excluir</button>
+                            </mat-menu>
+
+                            <mat-menu #actions="matMenu">
+                                <button  (click)="refresh(task, 'to-do')">To Do</button>
+                                <button  (click)="refresh(task, 'done')">Done</button>
+                            </mat-menu>
+                        </div>
+
+                        <span *ngIf="task.tag != '' ">{{task.tag}}</span>
+                        <span >{{task.mensagem}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="topo">
+                <h1 >Done</h1>
+                <button (click)="new('done')">Adicionar</button>
+            </div>
+
+            <div *ngFor="let task of listaTasks">
+                <div *ngIf="task.state === 'done'">
+                    <div>
+                        <div>
+                            <span>{{task.title}}</span>
+
+                            <button [matMenuTriggerFor]="menu">Alterações</button>
+
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item [matMenuTriggerFor]="actions"> Mover</button>
+                                <button  (click)="select(task)"> Editar</button>
+                                <br><br><br>
+                                <button  (click)="delete(task.id)"> Excluir</button>
+                            </mat-menu>
+                            <mat-menu #actions="matMenu">
+                                <button  (click)="refresh(task, 'to-do')">To Do</button>
+                                <button  (click)="refresh(task, 'doing')">Doing</button>
+                            </mat-menu>
+                        </div>
+
+                        <span *ngIf="task.tag != '' ">{{task.tag}}</span>
+                        <span>{{task.mensagem}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

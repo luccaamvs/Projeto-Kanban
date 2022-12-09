@@ -1,0 +1,23 @@
+
+<div>
+    <h1>Task</h1>
+    <form >
+        <div >
+            <label for="">Title</label>
+            <input type="text" [(ngModel)]="data.title" name="title" required>
+        </div>
+        <div>
+            <label for="">Categoria</label>
+            <input type="text" [(ngModel)]="data.tag" name="tag">
+        </div>
+        <div>
+            <label for="">Mensagem</label>
+            <textarea name="mensagem"[(ngModel)]="data.mensagem"></textarea>
+        </div>
+        <div>
+            <button (click)="salvar()">Salvar</button>
+            <button (click)="cancel()">Cancelar</button>
+        </div>
+    </form>
+</div>
+
